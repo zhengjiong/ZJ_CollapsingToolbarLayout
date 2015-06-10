@@ -1,16 +1,56 @@
 package com.zj.example.zj_collapsingtoolbarlayout;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * CollaspingToolbarLayout demo
+ * @author zhengjiong
+ * @date 2015年06月10日17:48:13
+ */
 public class MainActivity extends AppCompatActivity {
+
+    private ListView mListView;
+    private List<String> mItems = Arrays.asList("demo1", "demo2");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mListView = (ListView) findViewById(R.id.listview);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                mItems);
+
+        mListView.setAdapter(arrayAdapter);
+
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        startActivity(new Intent(MainActivity.this, Demo1.class));
+                        break;
+                    case 1:
+
+                        break;
+                }
+            }
+        });
     }
 
     @Override
