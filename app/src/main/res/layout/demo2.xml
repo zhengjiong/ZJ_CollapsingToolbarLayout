@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
 >
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -44,5 +45,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_discuss"
+        android:layout_margin="15dp"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right"
     />
 </android.support.design.widget.CoordinatorLayout>
