@@ -1,5 +1,6 @@
 package com.zj.example.zj_collapsingtoolbarlayout;
 
+
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,54 +17,68 @@ import java.util.List;
 
 /**
  * create by zhengjiong
- * Date: 2015-06-10
- * Time: 17:54
+ * Date: 2015-06-11
+ * Time: 15:10
  */
-public class Demo1 extends AppCompatActivity{
+public class Demo4 extends AppCompatActivity{
 
     private List<String> mItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo1);
+        setContentView(R.layout.demo4);
 
-        for (int i = 0; i < 30; i++) {
-            mItems.add(String.valueOf(i));
+        for (int i = 0; i < 50; i++) {
+            mItems.add(String.valueOf("item " + i));
         }
 
         initToolbar();
         initRecyclerView();
-        initCollapsingToolbar();
+        initCollapsingToolbarLayout();
     }
 
-    private void initCollapsingToolbar() {
-        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
-        collapsingToolbar.setTitle("cheese");
-
+    private void initCollapsingToolbarLayout() {
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
+        collapsingToolbarLayout.setTitle("cheese");
     }
 
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MyRecyclerViewAdapter());
-
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(new MyRecyclerAdapter());
     }
 
-    class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder>{
+    class MyViewHolder extends RecyclerView.ViewHolder{
+        private View mView;
+        private TextView mTextView;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+            mTextView = (TextView) mView.findViewById(R.id.txt_item);
+        }
+
+        public void bindData(int position){
+            mTextView.setText(mItems.get(position));
+        }
+    }
+
+    class MyRecyclerAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View view = LayoutInflater.from(Demo1.this).inflate(R.layout.recycler_item, viewGroup, false);
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(Demo4.this).inflate(R.layout.recycler_item, null);
             return new MyViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
-            myViewHolder.bindData(i);
+        public void onBindViewHolder(MyViewHolder holder, int position) {
+            holder.bindData(position);
         }
 
         @Override
@@ -72,24 +87,9 @@ public class Demo1 extends AppCompatActivity{
         }
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
-        private View mView;
-        private TextView mTxtTitle;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-            mTxtTitle = (TextView) mView.findViewById(R.id.txt_item);
-        }
-
-        public void bindData(int position) {
-            mTxtTitle.setText(mItems.get(position));
-        }
-    }
-
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        toolbar.setTitle("demo2");
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

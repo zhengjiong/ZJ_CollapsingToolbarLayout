@@ -21,7 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private List<String> mItems = Arrays.asList("demo1", "demo2");
+    private List<String> mItems = Arrays.asList("demo1", "demo2", "demo3", "demo4");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,13 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, Demo1.class));
                         break;
                     case 1:
-
+                        startActivity(new Intent(MainActivity.this, Demo2.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(MainActivity.this, Demo3.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(MainActivity.this, Demo4.class));
                         break;
                 }
             }

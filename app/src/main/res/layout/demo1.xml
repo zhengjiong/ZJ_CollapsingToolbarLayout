@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+必须使用CoordinatorLayout,不能用LinearLayout,不然所有滑动效果都会消失
+下方的RecyclerView也必须在CooldinatorLayout中才行
+-->
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
+    <!--
+    使用AppBarLayout允许Toolbar和其它的视图（如TabLayout提供了tab）
+    对标记了ScrollingViewBehavior的兄弟视图中的滚动事件产生反馈;
+
+    设置Dark主题(android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar")可以让
+    下方的Toolbar图标和CollapsingToolbar文字颜色变成白色
+    -->
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    >
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         >
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/cheese_2"
-            />
+
+
+        <!--
+            scroll：这个标签应该是想要滚出屏幕的所有视图的集合—对于那些并不使用这个标签的视图，他们而被订在屏幕的顶部。
+            enterAlways：这个标签确保任何向下的滑动都会使得这个视图可见，激活了“快速返回”模式。
+            exitUntilCollapsed：往上滑动,直到视图已经折叠到最小值就停止折叠,停靠在上方
+
+            注意一点：所有使用scroll标签的视图必须在不使用该标签的视图之前声明。这将确保所有的视图从顶部退出，而把固定的元素落下。
+        -->
+        <!--
+            scroll:向上滑动时会跟随一起滑动;
+            exitUntilCollapsed:往上滑动,直到视图已经折叠到最小值就停止折叠,停靠在上方
+        -->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            >
             <android.support.v7.widget.Toolbar
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-            />
+                android:background="?attr/colorPrimary"
+                app:layout_collapseMode="pin"/>
+            <!--app:layout_collapseMode=”pin”属性以确保Toolbar本身在视图collapse的时候依然能够被订在屏幕顶部。-->
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    />
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-</LinearLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</android.support.design.widget.CoordinatorLayout>
