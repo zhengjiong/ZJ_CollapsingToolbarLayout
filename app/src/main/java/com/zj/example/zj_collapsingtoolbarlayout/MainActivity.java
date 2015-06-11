@@ -21,7 +21,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private List<String> mItems = Arrays.asList("demo1", "demo2", "demo3", "demo4");
+    private List<String> mItems = Arrays.asList(
+            "基本用法",
+            "加入图片视差滚动效果",
+            "上滑时AppbarLayout完全隐藏(CollapsingToolbarLayout设置scrollFlags=scroll)",
+            "下滑时AppbarLayout立刻显示(CollapsingToolbarLayout设置scrollFlags=scroll|enterAlways)"
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 android.R.layout.simple_list_item_1,
                 mItems);
-
         mListView.setAdapter(arrayAdapter);
 
 

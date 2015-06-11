@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 必须使用CoordinatorLayout,不能用LinearLayout,不然所有滑动效果都会消失
-下方的RecyclerView也必须在CooldinatorLayout中才行
+下方的RecyclerView和FloatingActionButton也必须在CooldinatorLayout中才行
 -->
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
