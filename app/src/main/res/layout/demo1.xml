@@ -56,6 +56,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <!--
+        这里必须设置layout_behavior,不然recyclerView最頂部的一條數據會顯示不出來,
+        而且向上滑动的时候,会先滑动AppBar,appbar被隐藏之后才会滑动RecyclerView
+        字符串也必須設置成appbar_scrolling_view_behavior
+    -->
+
+
+    <!--
+        FloatingActionButton的背景色为主题中
+        colorAccent设置的颜色
+    -->
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

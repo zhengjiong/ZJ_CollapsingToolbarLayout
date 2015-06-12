@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * CollaspingToolbarLayout demo
+ * 
  * @author zhengjiong
  * @date 2015年06月10日17:48:13
  */
