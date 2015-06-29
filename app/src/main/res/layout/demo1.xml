@@ -55,7 +55,8 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
     <!--
         这里必须设置layout_behavior,不然recyclerView最頂部的一條數據會顯示不出來,
         而且向上滑动的时候,会先滑动AppBar,appbar被隐藏之后才会滑动RecyclerView

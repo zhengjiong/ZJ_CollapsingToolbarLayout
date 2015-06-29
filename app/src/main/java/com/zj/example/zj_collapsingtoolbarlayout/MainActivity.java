@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
             "基本用法",
             "加入图片视差滚动效果",
             "上滑时AppbarLayout完全隐藏(CollapsingToolbarLayout设置scrollFlags=scroll)",
-            "下滑时AppbarLayout立刻显示(CollapsingToolbarLayout设置scrollFlags=scroll|enterAlways)"
+            "下滑时AppbarLayout立刻显示(CollapsingToolbarLayout设置scrollFlags=scroll|enterAlways)",
+            "NestScrollView"
     );
 
     @Override
@@ -58,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 3:
                         startActivity(new Intent(MainActivity.this, Demo4.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(MainActivity.this, Demo5.class));
                         break;
                 }
             }

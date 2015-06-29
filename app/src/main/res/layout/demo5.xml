@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+必须使用CoordinatorLayout,不能用LinearLayout,不然所有滑动效果都会消失
+下方的RecyclerView和FloatingActionButton也必须在CooldinatorLayout中才行
+-->
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_collapseMode="pin" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_light"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_light"
+                android:text="NestedScrollView NestedScrollView NestedScrollView NestedScrollView \nNestedScrollView NestedScrollView NestedScrollView NestedScrollView \nNestedScrollView NestedScrollView NestedScrollView NestedScrollView \nNestedScrollView NestedScrollView NestedScrollView NestedScrollView \nNestedScrollView NestedScrollView NestedScrollView NestedScrollView \nNestedScrollView NestedScrollView NestedScrollView NestedScrollView \nNestedScrollView NestedScrollView NestedScrollView NestedScrollView \n"
+                android:textSize="18sp" />
+
+            <!--这个空白的view用于修复NestedScrollView中的内容不满一屏出现的bug-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

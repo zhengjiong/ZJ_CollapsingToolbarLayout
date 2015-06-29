@@ -28,7 +28,7 @@ public class Demo1 extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo1);
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 4; i++) {
             mItems.add(String.valueOf(i));
         }
 
@@ -41,6 +41,7 @@ public class Demo1 extends AppCompatActivity{
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         collapsingToolbar.setTitle("cheese");
 
+        collapsingToolbar.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
     }
 
     private void initRecyclerView() {
