@@ -21,7 +21,7 @@
         <activity android:name=".Demo3" android:theme="@style/AppTheme"/>
         <activity android:name=".Demo4" android:theme="@style/AppTheme"/>
         <activity android:name=".Demo5" android:theme="@style/AppTheme"/>
-
+        <activity android:name=".Demo6" android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
