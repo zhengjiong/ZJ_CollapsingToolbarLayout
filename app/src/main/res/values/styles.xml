@@ -12,4 +12,7 @@
     <style name="AppTheme" parent="Base.AppTheme">
 
     </style>
+    <style name="AppNoDrawsSystemBarTheme" parent="Base.AppTheme">
+
+    </style>
 </resources>

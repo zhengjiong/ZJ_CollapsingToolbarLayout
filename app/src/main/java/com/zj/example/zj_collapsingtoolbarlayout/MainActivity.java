@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
             "上滑时AppbarLayout完全隐藏(CollapsingToolbarLayout设置scrollFlags=scroll)",
             "下滑时AppbarLayout立刻显示(CollapsingToolbarLayout设置scrollFlags=scroll|enterAlways)",
             "NestScrollView",
-            "demo6"
+            "demo6",
+            "demo7"
     );
 
     @Override
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 5:
                         startActivity(new Intent(MainActivity.this, Demo6.class));
+                        break;
+                    case 6:
+                        startActivity(new Intent(MainActivity.this, Demo7.class));
                         break;
                 }
             }
