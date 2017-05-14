@@ -3,7 +3,8 @@
 必须使用CoordinatorLayout,不能用LinearLayout,不然所有滑动效果都会消失
 下方的RecyclerView和FloatingActionButton也必须在CooldinatorLayout中才行
 -->
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,8 +23,6 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         >
-
-
         <!--
             scroll：这个标签应该是想要滚出屏幕的所有视图的集合—对于那些并不使用这个标签的视图，他们而被订在屏幕的顶部。
             enterAlways：这个标签确保任何向下的滑动都会使得这个视图可见，激活了“快速返回”模式。
@@ -38,8 +37,8 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:layout_height="180dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways"
             >
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -71,11 +70,11 @@
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_discuss"
         android:layout_margin="16dp"
+        android:src="@mipmap/ic_discuss"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="right|bottom"
-    />
+        />
     <!--
         anchor设置成AppBarLayout才会有显示隐藏的动画
     -->

@@ -28,7 +28,7 @@ public class Demo1 extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo1);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 20; i++) {
             mItems.add(String.valueOf(i));
         }
 
