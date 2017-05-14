@@ -27,6 +27,7 @@
             scroll：这个标签应该是想要滚出屏幕的所有视图的集合—对于那些并不使用这个标签的视图，他们而被订在屏幕的顶部。
             enterAlways：这个标签确保任何向下的滑动都会使得这个视图可见，激活了“快速返回”模式。
             exitUntilCollapsed：往上滑动,直到视图已经折叠到最小值就停止折叠,停靠在上方
+            snap 简单理解，就是Child View滚动比例的一个吸附效果。也就是说，Child View不会存在局部显示的情况，滚动Child View的部分高度，当我们松开手指时，Child View要么向上全部滚出屏幕，要么向下全部滚进屏幕，有点类似ViewPager的左右滑动。
 
             注意一点：所有使用scroll标签的视图必须在不使用该标签的视图之前声明。这将确保所有的视图从顶部退出，而把固定的元素落下。
         -->
@@ -38,7 +39,7 @@
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways|snap"
             >
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
