@@ -4,4 +4,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="toolbar_margin_top">0dp</dimen>
+
+    <dimen name="contact_size">40dp</dimen>
+    <dimen name="drink_category_appbar_size">136dp</dimen>
+    <dimen name="actionbar_size">56dp</dimen>
+    <dimen name="search_bar_size">36dp</dimen>
+    <dimen name="drink_category_edit_init_left_margin">20dp</dimen>
+    <dimen name="home_init_top_margin">48dp</dimen>
 </resources>

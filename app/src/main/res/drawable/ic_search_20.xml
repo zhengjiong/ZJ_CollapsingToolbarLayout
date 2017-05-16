@@ -1,0 +1,5 @@
+<inset android:inset="2dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <selector>
+        <item android:drawable="@drawable/vector_search"/>
+    </selector>
+</inset>
