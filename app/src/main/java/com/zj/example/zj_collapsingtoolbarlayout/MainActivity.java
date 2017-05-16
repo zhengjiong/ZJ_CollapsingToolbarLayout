@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
             "demo7",
             "demo8",
             "demo9",
-            "demo10"
+            "demo10",
+            "demo11"
     );
 
     @Override
@@ -82,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 9:
                         startActivity(new Intent(MainActivity.this, Demo10.class));
+                        break;
+                    case 10:
+                        startActivity(new Intent(MainActivity.this, Demo11.class));
                         break;
                 }
             }

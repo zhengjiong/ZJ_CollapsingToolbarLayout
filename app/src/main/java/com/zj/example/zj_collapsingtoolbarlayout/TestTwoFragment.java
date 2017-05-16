@@ -26,7 +26,7 @@ import java.util.List;
 public class TestTwoFragment extends Fragment {
     private List<String> mItems = new ArrayList<>();
     private RecyclerView mRecyclerView1;
-    private RecyclerView mRecyclerView2;
+    public RecyclerView mRecyclerView2;
 
     public static TestTwoFragment newInstance() {
 
@@ -57,6 +57,18 @@ public class TestTwoFragment extends Fragment {
         mRecyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView2.setAdapter(new MyRecyclerViewAdapter());
 
+        /*mRecyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                System.out.println("onScrolled dy=" + dy);
+            }
+        });*/
         return view;
     }
 
