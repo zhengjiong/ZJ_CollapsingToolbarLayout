@@ -131,18 +131,11 @@ public class Demo11 extends AppCompatActivity {
                 for (int i = 0; i < fragments.size(); i++) {
                     final TestTwoFragment twoFragment = (TestTwoFragment) fragments.get(i);
                     if (i == position) {
-                        twoFragment.mRecyclerView2.setOnScrollListener(new RecyclerView.OnScrollListener() {
-                            @Override
-                            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                                super.onScrollStateChanged(recyclerView, newState);
-                            }
-
-                            @Override
-                            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                                super.onScrolled(recyclerView, dx, dy);
-                                System.out.println("currentPosition=" + position + " ,getScollYDistance=" + getScollYDistance(twoFragment.mRecyclerView2));
-                            }
-                        });
+                        twoFragment.mRecyclerView2.setOnScrollListener(new MyScrollListener(
+                                twoFragment.mRecyclerView2,
+                                twoFragment.headerView,
+                                position
+                        ));
                     } else {
                         twoFragment.mRecyclerView2.setOnScrollListener(null);
                     }
@@ -164,5 +157,35 @@ public class Demo11 extends AppCompatActivity {
         View firstVisiableChildView = layoutManager.findViewByPosition(position);
         int itemHeight = firstVisiableChildView.getHeight();
         return (position) * itemHeight - firstVisiableChildView.getTop();
+    }
+
+    class MyScrollListener extends RecyclerView.OnScrollListener {
+        int position;
+        RecyclerView recyclerView;
+        View headerView;
+
+        MyScrollListener(RecyclerView recyclerView, View headerView, int position) {
+            this.recyclerView = recyclerView;
+            this.headerView = headerView;
+            this.position = position;
+        }
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            int scollYDistance = getScollYDistance(recyclerView);
+            System.out.println("currentPosition=" + position + " ,getScollYDistance=" +
+                    scollYDistance);
+            scollYDistance += 150;
+            if (scollYDistance < 0) {
+                scollYDistance = 0;
+            }
+            headerView.setTranslationY(-scollYDistance);
+        }
     }
 }

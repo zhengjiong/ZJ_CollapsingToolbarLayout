@@ -27,6 +27,7 @@ public class TestTwoFragment extends Fragment {
     private List<String> mItems = new ArrayList<>();
     private RecyclerView mRecyclerView1;
     public RecyclerView mRecyclerView2;
+    public View headerView;
 
     public static TestTwoFragment newInstance() {
 
@@ -43,6 +44,7 @@ public class TestTwoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_test_two_layout, container, false);
         mRecyclerView1 = (RecyclerView) view.findViewById(R.id.recyclerview1);
         mRecyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerview2);
+        headerView = view.findViewById(R.id.header);
 
         for (int i = 0; i < 30; i++) {
             mItems.add(String.valueOf(i));
