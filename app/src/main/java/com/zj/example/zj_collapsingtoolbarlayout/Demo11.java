@@ -46,6 +46,7 @@ public class Demo11 extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private View mToolbarContent;
+    private TestTwoFragment currentFragment;
 
 
     @Override
@@ -87,8 +88,8 @@ public class Demo11 extends AppCompatActivity {
 
 
 
-                /*System.out.println("onOffsetChanged verticalOffset =" + verticalOffset + " ,total=" + appBarLayout.getTotalScrollRange()
-                        + " ,percent=" + percent);*/
+                System.out.println("onOffsetChanged verticalOffset =" + verticalOffset + " ,total=" + appBarLayout.getTotalScrollRange()
+                        + " ,percent=" + percent);
                 //searchView.setTranslationY(-verticalOffset);
 
 
@@ -96,6 +97,11 @@ public class Demo11 extends AppCompatActivity {
                 layoutParams.topMargin = actionbarSize - (int) (percent * max);
                 layoutParams.leftMargin = editInitLeftMargin + (int) (percent * leftTotalDistance);
                 searchView.setLayoutParams(layoutParams);
+
+                if (currentFragment.headerView.getTranslationY() <= -Utils.dip2px(Demo11.this, 50)) {
+                    int headerHeight = Utils.dip2px(Demo11.this, 50);
+                    currentFragment.headerView.setTranslationY((float) (-headerHeight * percent) - verticalOffset);
+                }
 
             }
         });
@@ -129,15 +135,16 @@ public class Demo11 extends AppCompatActivity {
             @Override
             public void onPageSelected(final int position) {
                 for (int i = 0; i < fragments.size(); i++) {
-                    final TestTwoFragment twoFragment = (TestTwoFragment) fragments.get(i);
+                    TestTwoFragment fragment = (TestTwoFragment) fragments.get(i);
                     if (i == position) {
-                        twoFragment.mRecyclerView2.setOnScrollListener(new MyScrollListener(
-                                twoFragment.mRecyclerView2,
-                                twoFragment.headerView,
+                        currentFragment = fragment;
+                        currentFragment.mRecyclerView2.setOnScrollListener(new MyScrollListener(
+                                currentFragment.mRecyclerView2,
+                                currentFragment.headerView,
                                 position
                         ));
                     } else {
-                        twoFragment.mRecyclerView2.setOnScrollListener(null);
+                        fragment.mRecyclerView2.setOnScrollListener(null);
                     }
 
                 }
@@ -149,6 +156,7 @@ public class Demo11 extends AppCompatActivity {
 
             }
         });
+        currentFragment = (TestTwoFragment) fragments.get(0);
     }
 
     public int getScollYDistance(RecyclerView recyclerView) {
@@ -178,10 +186,12 @@ public class Demo11 extends AppCompatActivity {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
+            if (headerView.getTranslationY() <= -Utils.dip2px(Demo11.this, 50)) {
+                return;
+            }
             int scollYDistance = getScollYDistance(recyclerView);
-            System.out.println("currentPosition=" + position + " ,getScollYDistance=" +
-                    scollYDistance);
-            scollYDistance += 150;
+            System.out.println("onScrolled currentPosition=" + position + " ,getScollYDistance=" + scollYDistance);
+            scollYDistance += Utils.dip2px(Demo11.this, 50);//50为初始ScollYDistanc距离
             if (scollYDistance < 0) {
                 scollYDistance = 0;
             }
