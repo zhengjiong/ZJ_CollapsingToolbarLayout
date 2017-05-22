@@ -74,6 +74,12 @@ public class TestTwoFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
     class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         @Override

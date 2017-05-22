@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * @author 郑炯
  * @version 1.0
  */
-public class Demo11 extends AppCompatActivity {
+public class Demo12 extends AppCompatActivity {
     private int max;
     private int toolbarContentTotalTranslationY;
     private int leftTotalDistance;
@@ -47,6 +49,7 @@ public class Demo11 extends AppCompatActivity {
     private ViewPager mViewPager;
     private View mToolbarContent;
     private TestTwoFragment currentFragment;
+    private List<Fragment> fragments;
 
 
     @Override
@@ -65,10 +68,10 @@ public class Demo11 extends AppCompatActivity {
         mToolbarContent = findViewById(R.id.toolbar_child_container);
 
         toolbarContentTotalTranslationY = Utils.dip2px(this, 12);
-        max = Utils.dip2px(Demo11.this, 46);//editText最大可滑动的距离
+        max = Utils.dip2px(Demo12.this, 46);//editText最大可滑动的距离
 
-        actionbarSize = Utils.dip2px(Demo11.this, 56);
-        editInitLeftMargin = Utils.dip2px(Demo11.this, 20);
+        actionbarSize = Utils.dip2px(Demo12.this, 56);
+        editInitLeftMargin = Utils.dip2px(Demo12.this, 20);
         leftTotalDistance = actionbarSize - editInitLeftMargin;
 
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -98,15 +101,10 @@ public class Demo11 extends AppCompatActivity {
                 layoutParams.leftMargin = editInitLeftMargin + (int) (percent * leftTotalDistance);
                 searchView.setLayoutParams(layoutParams);
 
-                if (currentFragment.headerView.getTranslationY() <= -Utils.dip2px(Demo11.this, 50)) {
-                    int headerHeight = Utils.dip2px(Demo11.this, 50);
-                    //currentFragment.headerView.setTranslationY((float) (-headerHeight * percent) - verticalOffset);
-                }
-
             }
         });
 
-        final List<Fragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         List<String> titles = new ArrayList<>();
 
         fragments.add(TestTwoFragment.newInstance());
@@ -138,11 +136,21 @@ public class Demo11 extends AppCompatActivity {
                     TestTwoFragment fragment = (TestTwoFragment) fragments.get(i);
                     if (i == position) {
                         currentFragment = fragment;
-                        currentFragment.mRecyclerView2.setOnScrollListener(new MyScrollListener(
-                                currentFragment.mRecyclerView2,
-                                currentFragment.headerView,
-                                position
-                        ));
+
+                        currentFragment.mRecyclerView2.setOnScrollListener(new AutoHideScrollListener() {
+                            @Override
+                            public void onHide() {
+                                currentFragment.headerView
+                                        .animate()
+                                        .translationY(-currentFragment.headerView.getHeight())
+                                        .setInterpolator(new AccelerateInterpolator(2));
+                            }
+
+                            @Override
+                            public void onShow() {
+                                currentFragment.headerView.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+                            }
+                        });
                     } else {
                         fragment.mRecyclerView2.setOnScrollListener(null);
                     }
@@ -156,7 +164,7 @@ public class Demo11 extends AppCompatActivity {
 
             }
         });
-        currentFragment = (TestTwoFragment) fragments.get(0);
+
     }
 
     @Override
@@ -168,69 +176,32 @@ public class Demo11 extends AppCompatActivity {
         }
     }
 
-    public int getScollYDistance(RecyclerView recyclerView) {
-        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-        int position = layoutManager.findFirstVisibleItemPosition();
-        View firstVisiableChildView = layoutManager.findViewByPosition(position);
-        int itemHeight = firstVisiableChildView.getHeight();
-        return (position) * itemHeight - firstVisiableChildView.getTop();
-    }
+    abstract class AutoHideScrollListener extends RecyclerView.OnScrollListener {
+        private static final int HIDE_THRESHOLD = 20;
+        private int scrolledDistance = 0;
+        private boolean isVisible = true;
 
-    class MyScrollListener extends RecyclerView.OnScrollListener {
-        int position;
-        RecyclerView recyclerView;
-        View headerView;
+        public abstract void onHide();
 
-        MyScrollListener(RecyclerView recyclerView, View headerView, int position) {
-            this.recyclerView = recyclerView;
-            this.headerView = headerView;
-            this.position = position;
-        }
-
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
-        }
+        public abstract void onShow();
 
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
-            int scollYDistance = getScollYDistance(recyclerView);
 
-
-            /*if (headerView.getTranslationY() <= -Utils.dip2px(Demo11.this, 50)) {
-                return;
-            }*/
-
-
-            scollYDistance += Utils.dip2px(Demo11.this, 50);//50为初始ScollYDistanc距离
-            if (scollYDistance < 0) {
-                scollYDistance = 0;
+            if ((isVisible && dy > 0) || (!isVisible && dy < 0)) {
+                scrolledDistance += Math.abs(dy);
             }
-            //headerView.setTranslationY(-scollYDistance);
 
-            float currentTranslationY = headerView.getTranslationY();
-            if (dy > 0) {
-                float translationY = currentTranslationY - dy;
-                if (translationY > 0) {
-                    translationY = 0;
-                } else if (translationY < -Utils.dip2px(Demo11.this, 50)) {
-                    translationY = -Utils.dip2px(Demo11.this, 50);
-                }
-                headerView.setTranslationY(translationY);
-            } else {
-                float translationY = currentTranslationY - dy;
-                if (translationY >= 0) {
-                    translationY = 0;
-                } else if (translationY < -Utils.dip2px(Demo11.this, 50)) {
-                    translationY = -Utils.dip2px(Demo11.this, 50);
-                }
-                headerView.setTranslationY(translationY);
+            if (scrolledDistance > HIDE_THRESHOLD && isVisible) {
+                onHide();
+                isVisible = false;
+                scrolledDistance = 0;
+            } else if (scrolledDistance > HIDE_THRESHOLD && !isVisible) {
+                onShow();
+                isVisible = true;
+                scrolledDistance = 0;
             }
-            System.out.println("onScrolled currentPosition=" + position + " ,getScollYDistance=" + scollYDistance + " ,dy=" + dy +
-                    " translationY="+headerView.getTranslationY());
-
-
         }
     }
 }
