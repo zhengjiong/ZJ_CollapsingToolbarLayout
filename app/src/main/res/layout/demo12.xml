@@ -16,10 +16,13 @@
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             app:contentScrim="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways|snap"
             app:statusBarScrim="@android:color/holo_red_dark"
+            app:paddingStart="0dp"
+            app:paddingEnd="0dp"
+            app:expandedTitleMargin="0dp"
             app:titleEnabled="false">
 
             <android.support.v7.widget.Toolbar
@@ -73,43 +76,20 @@
                 </LinearLayout>
             </android.support.v7.widget.Toolbar>
 
-           <!-- <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="1">
-
-                <android.support.v4.widget.Space
-                    android:id="@+id/space"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="16dp"/>
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:gravity="center_vertical"/>
-            </LinearLayout>-->
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_collapseMode="parallax"
+                app:layout_collapseMode="none"
                 app:layout_collapseParallaxMultiplier="1">
 
                 <FrameLayout
                     android:id="@+id/edit_search"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="@dimen/actionbar_size"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/drink_category_search_bg"
                     android:clickable="true">
 

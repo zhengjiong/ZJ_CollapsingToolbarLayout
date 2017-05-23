@@ -48,14 +48,13 @@ public class Demo12 extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private View mToolbarContent;
-    private TestTwoFragment currentFragment;
     private List<Fragment> fragments;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo11);
+        setContentView(R.layout.demo12);
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         mAvatarImageView = (CircleImageView) findViewById(R.id.imageView_avatar);
@@ -68,7 +67,7 @@ public class Demo12 extends AppCompatActivity {
         mToolbarContent = findViewById(R.id.toolbar_child_container);
 
         toolbarContentTotalTranslationY = Utils.dip2px(this, 12);
-        max = Utils.dip2px(Demo12.this, 46);//editText最大可滑动的距离
+        //max = Utils.dip2px(Demo12.this, 46);//editText最大可滑动的距离
 
         actionbarSize = Utils.dip2px(Demo12.this, 56);
         editInitLeftMargin = Utils.dip2px(Demo12.this, 20);
@@ -91,13 +90,11 @@ public class Demo12 extends AppCompatActivity {
 
 
 
-               /* System.out.println("onOffsetChanged verticalOffset =" + verticalOffset + " ,total=" + appBarLayout.getTotalScrollRange()
-                        + " ,percent=" + percent);*/
-                //searchView.setTranslationY(-verticalOffset);
-
+                System.out.println("onOffsetChanged verticalOffset =" + verticalOffset + " ,total=" + mAppBarLayout.getTotalScrollRange()
+                        + " ,percent=" + percent);
 
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) searchView.getLayoutParams();
-                layoutParams.topMargin = actionbarSize - (int) (percent * max);
+                //layoutParams.topMargin = actionbarSize - (int) (percent * max);
                 layoutParams.leftMargin = editInitLeftMargin + (int) (percent * leftTotalDistance);
                 searchView.setLayoutParams(layoutParams);
 
@@ -107,11 +104,11 @@ public class Demo12 extends AppCompatActivity {
         fragments = new ArrayList<>();
         List<String> titles = new ArrayList<>();
 
-        fragments.add(TestTwoFragment.newInstance());
-        fragments.add(TestTwoFragment.newInstance());
-        fragments.add(TestTwoFragment.newInstance());
-        fragments.add(TestTwoFragment.newInstance());
-        fragments.add(TestTwoFragment.newInstance());
+        fragments.add(TestTwoAutoHideHeaderFragment.newInstance());
+        fragments.add(TestTwoAutoHideHeaderFragment.newInstance());
+        fragments.add(TestTwoAutoHideHeaderFragment.newInstance());
+        fragments.add(TestTwoAutoHideHeaderFragment.newInstance());
+        fragments.add(TestTwoAutoHideHeaderFragment.newInstance());
 
         titles.add("tab1");
         titles.add("tab2");
@@ -123,85 +120,13 @@ public class Demo12 extends AppCompatActivity {
         mViewPager.setAdapter(new TestFragmentPagerAdapter(getSupportFragmentManager(), titles, fragments));
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setOffscreenPageLimit(5);
-
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(final int position) {
-                for (int i = 0; i < fragments.size(); i++) {
-                    TestTwoFragment fragment = (TestTwoFragment) fragments.get(i);
-                    if (i == position) {
-                        currentFragment = fragment;
-
-                        currentFragment.mRecyclerView2.setOnScrollListener(new AutoHideScrollListener() {
-                            @Override
-                            public void onHide() {
-                                currentFragment.headerView
-                                        .animate()
-                                        .translationY(-currentFragment.headerView.getHeight())
-                                        .setInterpolator(new AccelerateInterpolator(2));
-                            }
-
-                            @Override
-                            public void onShow() {
-                                currentFragment.headerView.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
-                            }
-                        });
-                    } else {
-                        fragment.mRecyclerView2.setOnScrollListener(null);
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-            mViewPager.setCurrentItem(1);
-            mViewPager.setCurrentItem(0);
-        }
-    }
-
-    abstract class AutoHideScrollListener extends RecyclerView.OnScrollListener {
-        private static final int HIDE_THRESHOLD = 20;
-        private int scrolledDistance = 0;
-        private boolean isVisible = true;
-
-        public abstract void onHide();
-
-        public abstract void onShow();
-
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-
-            if ((isVisible && dy > 0) || (!isVisible && dy < 0)) {
-                scrolledDistance += Math.abs(dy);
-            }
-
-            if (scrolledDistance > HIDE_THRESHOLD && isVisible) {
-                onHide();
-                isVisible = false;
-                scrolledDistance = 0;
-            } else if (scrolledDistance > HIDE_THRESHOLD && !isVisible) {
-                onShow();
-                isVisible = true;
-                scrolledDistance = 0;
-            }
+            max = mAppBarLayout.getTotalScrollRange();
         }
     }
 }

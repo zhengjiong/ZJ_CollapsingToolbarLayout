@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,17 +25,17 @@ import java.util.List;
  * @author 郑炯
  * @version 1.0
  */
-public class TestTwoFragment extends Fragment {
+public class TestTwoAutoHideHeaderFragment extends Fragment {
     private List<String> mItems = new ArrayList<>();
     private RecyclerView mRecyclerView1;
     public RecyclerView mRecyclerView2;
     public View headerView;
 
-    public static TestTwoFragment newInstance() {
+    public static TestTwoAutoHideHeaderFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        TestTwoFragment fragment = new TestTwoFragment();
+        TestTwoAutoHideHeaderFragment fragment = new TestTwoAutoHideHeaderFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,6 +61,33 @@ public class TestTwoFragment extends Fragment {
         mRecyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView2.setAdapter(new MyRecyclerViewAdapter());
 
+        /*mRecyclerView2.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                System.out.println("onScrolled dy=" + dy);
+            }
+        });*/
+
+        mRecyclerView2.setOnScrollListener(new AbsAutoHideScrollListener() {
+            @Override
+            public void onHide() {
+                headerView
+                        .animate()
+                        .translationY(-headerView.getHeight())
+                        .setInterpolator(new AccelerateInterpolator(2));
+            }
+
+            @Override
+            public void onShow() {
+                headerView.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
+            }
+        });
         return view;
     }
 
