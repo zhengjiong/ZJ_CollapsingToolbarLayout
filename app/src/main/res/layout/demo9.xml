@@ -140,6 +140,8 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:background="@android:color/white"
             />
+        <!--这里tablayout 可以不用加layout_scrollFlags, 加了也没有什么用-->
+
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

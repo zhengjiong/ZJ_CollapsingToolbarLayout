@@ -30,34 +30,13 @@
                 app:navigationIcon="@mipmap/ic_discuss"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="1">
-
-                <android.support.v4.widget.Space
-                    android:id="@+id/space"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="16dp"/>
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    style="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:gravity="center_vertical"/>
-            </LinearLayout>
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="1">
+                <!--设置为parallax, 并把Multiplier设置为1,
+                整个内容就不会移动,不然会移动-->
 
                 <TextView
                     android:id="@+id/textView_title"

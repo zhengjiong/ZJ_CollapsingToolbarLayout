@@ -29,12 +29,13 @@ public class MainActivity extends AppCompatActivity {
             "下滑时AppbarLayout立刻显示(CollapsingToolbarLayout设置scrollFlags=scroll|enterAlways)",
             "NestScrollView",
             "demo6",
-            "demo7(放饿了么步骤1)",
-            "demo8(放饿了么步骤2)",
-            "demo9(放饿了么步骤3)",
-            "demo10(放饿了么步骤4)",
-            "demo11(放饿了么最终效果1)",
-            "demo12(放饿了么最终效果2<最好的效果>)"
+            "demo7(仿饿了么步骤1)",
+            "demo8(仿饿了么步骤2)",
+            "demo9(仿饿了么步骤3)",
+            "demo10(仿饿了么步骤4)",
+            "demo11(仿饿了么最终效果1)",
+            "demo12(仿饿了么最终效果2<最好的效果>)",
+            "demo13(仿淘宝搜索结果)"
     );
 
     @Override
@@ -90,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 11:
                         startActivity(new Intent(MainActivity.this, Demo12.class));
+                        break;
+                    case 12:
+                        startActivity(new Intent(MainActivity.this, Demo13TaoBao.class));
                         break;
                 }
             }
