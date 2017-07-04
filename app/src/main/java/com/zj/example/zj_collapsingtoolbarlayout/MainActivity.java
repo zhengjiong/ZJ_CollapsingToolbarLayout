@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
             "demo10(仿饿了么步骤4)",
             "demo11(仿饿了么最终效果1)",
             "demo12(仿饿了么最终效果2<最好的效果>)",
-            "demo13(仿淘宝搜索结果)"
+            "demo13(仿淘宝搜索结果)",
+            "demo14(顶部透明渐变效果)"
     );
 
     @Override
@@ -94,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 12:
                         startActivity(new Intent(MainActivity.this, Demo13TaoBao.class));
+                        break;
+                    case 13:
+                        startActivity(new Intent(MainActivity.this, Demo14.class));
                         break;
                 }
             }

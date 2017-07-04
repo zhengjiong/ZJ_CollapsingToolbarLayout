@@ -29,6 +29,7 @@
         <activity android:name=".Demo11" android:theme="@style/AppNoDrawsSystemBarTheme"/>
         <activity android:name=".Demo12" android:theme="@style/AppNoDrawsSystemBarTheme"/>
         <activity android:name=".Demo13TaoBao" android:theme="@style/AppNoDrawsSystemBarTheme"/>
+        <activity android:name=".Demo14" android:theme="@style/AppNoDrawsSystemBarTheme"/>
     </application>
 
 </manifest>
