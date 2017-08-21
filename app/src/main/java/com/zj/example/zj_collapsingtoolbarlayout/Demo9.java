@@ -45,6 +45,7 @@ public class Demo9 extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private View searchView;
+    private View searchView2;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private View mToolbarContent;
@@ -62,6 +63,7 @@ public class Demo9 extends AppCompatActivity {
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.edit_search);
+        searchView2 = findViewById(R.id.edit_search2);
         mTabLayout = (TabLayout) findViewById(R.id.tablayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mToolbarContent = findViewById(R.id.toolbar_child_container);
@@ -77,6 +79,7 @@ public class Demo9 extends AppCompatActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 verticalOffset = Math.abs(verticalOffset);
+                max = appBarLayout.getTotalScrollRange();
                 if (verticalOffset > max) {
                     verticalOffset = max;
                 }
@@ -87,18 +90,19 @@ public class Demo9 extends AppCompatActivity {
                 }
                 mToolbarContent.setAlpha((float) (1 - percent));
                 mToolbarContent.setTranslationY((float) (-1 * toolbarContentTotalTranslationY * percent));
-
+                mToolbarContent.setTranslationX((float) (percent * max));
 
 
                 System.out.println("onOffsetChanged verticalOffset =" + verticalOffset + " ,total=" + appBarLayout.getTotalScrollRange()
                         + " ,percent=" + percent);
-                //searchView.setTranslationY(-verticalOffset);
-
+                searchView.setTranslationY(-verticalOffset);
+                searchView2.setTranslationY(-verticalOffset);
+                searchView.setTranslationX((float) (percent * max));
 
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) searchView.getLayoutParams();
                 layoutParams.topMargin = actionbarSize - (int) (percent * max);
                 layoutParams.leftMargin = editInitLeftMargin + (int) (percent * leftTotalDistance);
-                searchView.setLayoutParams(layoutParams);
+                //searchView.setLayoutParams(layoutParams);
 
             }
         });
