@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
             "demo11(仿饿了么最终效果1)",
             "demo12(仿饿了么最终效果2<最好的效果>)",
             "demo13(仿淘宝搜索结果)",
-            "demo14(顶部透明渐变效果)"
+            "demo14(顶部透明渐变效果)",
+            "demo15(顶部固定,中间可滑动,下面滑动停靠在顶部下方-方式1)",
+            "demo16(顶部固定,中间可滑动,下面滑动停靠在顶部下方-方式2)"
     );
 
     @Override
@@ -98,6 +100,15 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 13:
                         startActivity(new Intent(MainActivity.this, Demo14.class));
+                        break;
+                    case 14:
+                        startActivity(new Intent(MainActivity.this, Demo15.class));
+                        break;
+                    case 15:
+                        startActivity(new Intent(MainActivity.this, Demo15.class));
+                        break;
+                    case 16:
+                        startActivity(new Intent(MainActivity.this, Demo16.class));
                         break;
                 }
             }
