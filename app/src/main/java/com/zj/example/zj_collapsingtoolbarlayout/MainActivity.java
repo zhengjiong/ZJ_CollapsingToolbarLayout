@@ -105,9 +105,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, Demo15.class));
                         break;
                     case 15:
-                        startActivity(new Intent(MainActivity.this, Demo15.class));
-                        break;
-                    case 16:
                         startActivity(new Intent(MainActivity.this, Demo16.class));
                         break;
                 }

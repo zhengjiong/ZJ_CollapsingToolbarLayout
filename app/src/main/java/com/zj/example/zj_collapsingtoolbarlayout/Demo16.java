@@ -16,6 +16,6 @@ public class Demo16 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo15);
+        setContentView(R.layout.demo16);
     }
 }
